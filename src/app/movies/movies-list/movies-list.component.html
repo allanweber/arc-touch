@@ -15,7 +15,7 @@
       </ion-thumbnail>
       <ion-label>
         <h2>{{ movie.title }}</h2>
-        <h3>{{ movie.date | date }}</h3>
+        <h3>{{ movie.date | localizedDate }}</h3>
         <app-genres [genres]="movie.genres" [max]="2"></app-genres>
       </ion-label>
     </ion-item>

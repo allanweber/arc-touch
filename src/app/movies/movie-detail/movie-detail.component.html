@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
+    <ion-title>{{ movie.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-img [src]="movie.image"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{ movie.title }}</ion-card-title>
+      <ion-card-subtitle>{{ movie.date | date }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <app-genres [genres]="movie.genres"></app-genres>
+      {{ movie.overview }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

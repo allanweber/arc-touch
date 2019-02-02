@@ -1,9 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 import { MoviesModule } from './movies/movies.module';
 import { genreProviderFactory, GenreService } from './movies/services/genre.service';
@@ -11,11 +14,27 @@ import {
   configurationProviderFactory,
   MoviesConfigurationService
 } from './movies/services/movies-configuration.service';
+import { LocalizedDatePipe } from './pipes/localized-date.pipe';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LocalizedDatePipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), MoviesModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    MoviesModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
+  ],
   providers: [
     StatusBar,
     SplashScreen,

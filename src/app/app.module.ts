@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Globalization } from '@ionic-native/globalization/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -53,7 +54,8 @@ export function createTranslateLoader(http: HttpClient) {
       deps: [MoviesConfigurationService],
       multi: true
     },
-    Globalization
+    Globalization,
+    AndroidPermissions
   ],
   bootstrap: [AppComponent]
 })

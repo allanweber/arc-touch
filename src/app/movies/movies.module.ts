@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalizedDatePipe } from '../pipes/localized-date.pipe';
 import { GenresComponent } from './genres/genres.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { MoviesListcomponent } from './movies-list/movies-list.component';
@@ -18,6 +19,6 @@ import { MovieRoutingModule } from './movies.routing';
     HttpClientModule,
     TranslateModule
   ],
-  declarations: [MoviesListcomponent, MovieDetailComponent, GenresComponent]
+  declarations: [MoviesListcomponent, MovieDetailComponent, GenresComponent, LocalizedDatePipe]
 })
 export class MoviesModule {}

@@ -1,7 +1,11 @@
+import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en';
+import localePt from '@angular/common/locales/pt';
 import { Component } from '@angular/core';
+import { Globalization } from '@ionic-native/globalization/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -9,15 +13,57 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  private allowedLanguages = ['en-US', 'pt-BR'];
+  private defualtLanguge = 'en-US';
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private globalization: Globalization,
+    private toastController: ToastController
   ) {
     this.initializeApp();
-    translate.setDefaultLang('en');
-    translate.use('pt');
+
+    translate.setDefaultLang(this.defualtLanguge);
+
+    this.globalization
+      .getPreferredLanguage()
+      .then(res => {
+        if (this.allowedLanguages.find(e => e == res.value)) {
+          translate.use(res.value);
+          console.log('language :', res.value);
+        } else {
+          console.log('Your language is not supported');
+          this.presentLanguageError('LANG_NOT_SUPORTED');
+        }
+      })
+      .catch(e => {
+        console.log('Error to get preferred language: ', e);
+        this.presentLanguageError('LANG_ERROR');
+      });
+
+    registerLocaleData(localePt);
+    registerLocaleData(localeEn);
+
+    /*
+      Use this to set locale when runing with ionic serve
+    */
+    translate.use('en-US');
+  }
+
+  async presentLanguageError(message: string) {
+    this.translate.get(message).subscribe(result => {
+      this.toastController
+        .create({
+          message: result,
+          showCloseButton: true,
+          position: 'top',
+          closeButtonText: 'OK'
+        })
+        .then(toast => toast.present());
+    });
   }
 
   initializeApp() {

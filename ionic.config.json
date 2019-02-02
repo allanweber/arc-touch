@@ -1,0 +1,7 @@
+{
+  "name": "ArcTouch Movies",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

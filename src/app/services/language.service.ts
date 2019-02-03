@@ -44,7 +44,7 @@ export class LanguageService {
     /*
       Use this to set locale when runing with ionic serve
     */
-    this.translate.use('en-US');
+    //this.translate.use('pt-BR');
   }
 
   async presentLanguageError(message: string) {

@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MoviesConfiguration } from '../model/movies-configuration.model';
@@ -13,7 +14,7 @@ export class MoviesConfigurationService {
 
   private configuration: MoviesConfiguration;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private translate: TranslateService) {}
 
   getConfiguration(): MoviesConfiguration {
     return this.configuration;
@@ -22,7 +23,9 @@ export class MoviesConfigurationService {
   load(): Promise<any> {
     return this.httpClient
       .get<MoviesConfiguration>(this.configUrl, {
-        params: new HttpParams().set('api_key', environment.token).set('language', 'pt-BR')
+        params: new HttpParams()
+          .set('api_key', environment.token)
+          .set('language', this.translate.currentLang)
       })
       .pipe(
         map(response => {

@@ -1,15 +1,32 @@
 # ArcTouch Challenge Project
 
-##After clone this project, install and run ionic projects:
+## Libs:
+
+- IONIC
+- ANGULAR 7
+- @ngx-translate/core
+- @ngx-translate/http-loader
+- @ionic-native/android-permissions
+- @ionic-native/globalization
+
+## APK
+
+There is a folder with the APK file, ready to be installed, but as I am not a registred developer and don't have the credentials, this is not a valid project to Google Play, but it's safe, trust me XD :-P
+
+## After clone this project, install and run ionic projects:
+
 Install ionic: **npm install -g ionic**
 
 Download packages: **npm i**
 
 Run: **ionic serve**
 
+**You will need android environment as well.**
+
 ## Runnning with ionic serve command
 
-To run properly with ionic serve command, uncomment the line **translate.use('en-US');** in the **services/language.service.ts** file. This is a workaroud to cordova running with ionic serve.
+To run properly with **ionic serve** command, uncomment the line **translate.use('en-US');** in the **services/language.service.ts** file. This is a workaroud to cordova running with ionic serve.
+You can setup the aplication to portguese as well, junto change in the same lime the instruction 'en-US' to 'pt-BR'
 
 ## To simulate with the browser run:
 

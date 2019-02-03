@@ -20,8 +20,6 @@ export class LanguageService {
   ) {}
 
   load() {
-    console.log('setting lang');
-
     this.translate.setDefaultLang(this.defualtLanguge);
 
     this.globalization

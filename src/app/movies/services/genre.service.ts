@@ -21,8 +21,6 @@ export class GenreService {
   }
 
   load(): Promise<any> {
-    console.log(this.translate.currentLang);
-
     return this.httpClient
       .get<GenreResult>(this.genreUrl, {
         params: new HttpParams()

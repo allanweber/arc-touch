@@ -9,7 +9,7 @@ Run: **ionic serve**
 
 ## Runnning with ionic serve command
 
-To run properly with ionic serve command, uncomment the line **translate.use('en-US');** in the **app.component.ts** file. This is a workaroud to cordova running with ionic serve.
+To run properly with ionic serve command, uncomment the line **translate.use('en-US');** in the **services/language.service.ts** file. This is a workaroud to cordova running with ionic serve.
 
 ## To simulate with the browser run:
 

@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -24,7 +25,8 @@ export class MovieService {
   constructor(
     private httpClient: HttpClient,
     private genreService: GenreService,
-    private configuration: MoviesConfigurationService
+    private configuration: MoviesConfigurationService,
+    private translate: TranslateService
   ) {
     this.configs = this.configuration.getConfiguration();
   }
@@ -44,7 +46,7 @@ export class MovieService {
       .get(this.urlUpcomings, {
         params: new HttpParams()
           .set('api_key', environment.token)
-          .set('language', 'pt-BR')
+          .set('language', this.translate.currentLang)
           .set('page', page.toString())
       })
       .pipe(

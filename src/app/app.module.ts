@@ -16,6 +16,7 @@ import {
   configurationProviderFactory,
   MoviesConfigurationService
 } from './movies/services/movies-configuration.service';
+import { languageProviderFactory, LanguageService } from './services/language.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,17 +44,23 @@ export function createTranslateLoader(http: HttpClient) {
     GenreService,
     {
       provide: APP_INITIALIZER,
+      useFactory: languageProviderFactory,
+      deps: [LanguageService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
       useFactory: genreProviderFactory,
       deps: [GenreService],
       multi: true
     },
-    MoviesConfigurationService,
     {
       provide: APP_INITIALIZER,
       useFactory: configurationProviderFactory,
       deps: [MoviesConfigurationService],
       multi: true
     },
+    MoviesConfigurationService,
     Globalization,
     AndroidPermissions
   ],

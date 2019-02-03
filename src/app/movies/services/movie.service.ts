@@ -78,7 +78,12 @@ export class MovieService {
   }
 
   getImage(upcoming: Upcoming, size: String) {
-    return `${this.configs.images.base_url}${size}${upcoming.poster_path}`;
+    if (upcoming.poster_path) {
+      return `${this.configs.images.base_url}${size}${upcoming.poster_path}`;
+    } else if (upcoming.backdrop_path) {
+      return `${this.configs.images.base_url}${size}${upcoming.backdrop_path}`;
+    }
+    return './assets/icon/movie.png';
   }
 
   getGenres(ids: number[]): Genre[] {

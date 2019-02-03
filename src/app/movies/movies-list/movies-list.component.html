@@ -1,13 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ 'MOVIES' | translate }}</ion-title>
+    <ion-title>{{ (!isSearching ? 'MOVIES' : 'SEARCHING') | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="refreshList($event)">
     <ion-refresher-content [refreshingText]="'REFRESHING' | translate"></ion-refresher-content>
   </ion-refresher>
+  <ion-searchbar
+    [placeholder]="'SEARCH' | translate"
+    debounce="500"
+    (ionClear)="searchClear($event)"
+    (ionChange)="searchChanged($event)"
+  ></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let movie of movies" (click)="openMovie(movie)">
       <ion-thumbnail slot="start">
@@ -21,7 +27,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" [loadingText]="'LOADING' | translate">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>

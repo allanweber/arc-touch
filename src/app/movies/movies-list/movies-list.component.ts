@@ -23,11 +23,20 @@ export class MoviesListcomponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadMovies(null);
+    this.loadUpcomings(null);
   }
 
-  loadMovies(event) {
+  loadUpcomings(event) {
     this.movieService.getMovies(this.currentPage++).subscribe(response => {
+      this.movies = response;
+      if (event) {
+        event.target.complete();
+      }
+    });
+  }
+
+  loadSearching(event) {
+    this.movieService.searchMovies(this.currentPage++, this.searchBar.value).subscribe(response => {
       this.movies = response;
       if (event) {
         event.target.complete();
@@ -39,14 +48,18 @@ export class MoviesListcomponent implements OnInit {
     this.isSearching = false;
     this.currentPage = 1;
     this.movieService.clearMovies();
-    this.loadMovies(event);
+    this.loadUpcomings(event);
   }
 
   loadMoreData(event) {
     if (event.cancelable) {
       event.preventDefault();
     }
-    this.loadMovies(event);
+    if (!this.isSearching) {
+      this.loadUpcomings(event);
+    } else {
+      this.loadSearching(event);
+    }
   }
 
   refreshList(event) {
@@ -64,7 +77,9 @@ export class MoviesListcomponent implements OnInit {
   searchChanged(event) {
     if (this.isSearchEvent(event)) {
       this.isSearching = true;
-      console.log('searchChanged');
+      this.currentPage = 1;
+      this.movieService.clearMovies();
+      this.loadSearching(null);
     }
   }
 

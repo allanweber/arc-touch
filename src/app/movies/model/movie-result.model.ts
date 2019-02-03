@@ -1,4 +1,4 @@
-export class Upcoming {
+export class MovieResult {
   id: number;
   title: string;
   overview: string;

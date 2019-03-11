@@ -1,0 +1,9 @@
+{
+	"MOVIES": "Upcoming Movies",
+	"REFRESHING": "Refreshing...",
+	"LOADING":"Loading more data...",
+	"SEARCH": "Search",
+	"SEARCHING": "Searching",
+	"LANG_ERROR": "Error to get preferred language, this app will work in english.",
+	"LANG_NOT_SUPORTED": "Your language is not supported, this app will work in english."
+}
